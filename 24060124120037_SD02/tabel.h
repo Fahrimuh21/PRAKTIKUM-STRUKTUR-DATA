@@ -1,8 +1,8 @@
 #define tabel_H 
-/* Program   : table.h*/
-/* Deskripsi : header file modul tabel */
-/* NIM/Nama  : 24060124120037/Muhammad Fahri*/
-/* Tanggal   : 11 september 2025*/
+/* Program   : */
+/* Deskripsi : */
+/* NIM/Nama  : */
+/* Tanggal   : */
 /***********************************/
 #include <stdio.h>
 #include "boolean.h"
