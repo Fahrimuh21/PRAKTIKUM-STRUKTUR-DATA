@@ -1,7 +1,7 @@
 /* Program   : tstack.h */
 /* Deskripsi : file HEADER modul stack karakter */
-/* NIM/Nama  : */
-/* Tanggal   : */
+/* NIM/Nama  : 24060124120037/Muhammad Fahri*/
+/* Tanggal   : 4 Oktober 2025*/
 /***********************************/
 
 #include <stdio.h>

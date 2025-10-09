@@ -1,8 +1,8 @@
 /* Program   : tqueue2.h */
 /* Deskripsi : ADT Queue representasi kontigu dengan array, 
                model II: head bergeser/jelajah */
-/* NIM/Nama  : */
-/* Tanggal   : */
+/* NIM/Nama  : 24060124120037/Muhammad Fahri*/
+/* Tanggal   : 4 Oktober 2025*/
 /***********************************/
 
 #include<stdio.h>

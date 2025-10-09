@@ -5,8 +5,8 @@
 /* Program   : tqueue.h */
 /* Deskripsi : ADT Queue representasi kontigu dengan array, 
                model I: head selalu di posisi 0 atau 1 */
-/* NIM/Nama  : */
-/* Tanggal   : */
+/* NIM/Nama  : 24060124120037/Muhammad Fahri*/
+/* Tanggal   : 4 Oktober 2025*/
 /***********************************/
 
 /* type tQueue = <  wadah: array [1..5] of character ,
