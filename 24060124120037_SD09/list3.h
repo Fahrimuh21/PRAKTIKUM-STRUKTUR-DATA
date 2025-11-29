@@ -1,16 +1,17 @@
 /* File : list3.h */
 /* Deskripsi : ADT list berkait dengan representasi fisik pointer */
-/* NIM & Nama : */
-/* Tanggal : */
+/* NIM & Nama : 24060124120037/Muhammad Fahri*/
+/* Tanggal : 20 November 2025*/
 #ifndef list3_H
 #define list3_H
+//#include <stdbool.h>
 
 #define NIL NULL
 #define First(L) (L).First 
 #define info(P)  (P)->info
 #define prev(P)  (P)->prev 
 #define next(P)  (P)->next 
-typedef enum { false, true } boolean;
+typedef enum {false, true} boolean;
 /* type infotype = character */
 typedef char infotype; /* elemen bertipe character */
 /* type address = pointer to Elm */

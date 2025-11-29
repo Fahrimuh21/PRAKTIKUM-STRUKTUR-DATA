@@ -1,4 +1,4 @@
-/* File : List2.h */
+/* File : List2. c*/
 /* Deskripsi : realisasi body ADT list2 berkait representasi fisik pointer */
 /* NIM & Nama : 24060124120037 /Muhammad Fahri */
 /* Tanggal : 13 November 2025*/
