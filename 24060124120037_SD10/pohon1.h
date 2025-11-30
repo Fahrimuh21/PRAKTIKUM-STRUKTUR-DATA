@@ -55,6 +55,10 @@ bintree GetLeft(bintree P);
 { Mengirimkan Anak Kanan pohon biner P }*/
 bintree GetRight(bintree P);
 
+/*function GetAkar (P : BinTree) -> infotype
+{ Mengirimkan Akar pohon biner P }*/
+infotype GetAkar(bintree P);
+
 /****************** PREDIKAT ******************/
 /* function IsEmptyTree(P:bintree) --> boolean 
    {mengembalikan true bila bintree L kosong} */

@@ -22,7 +22,7 @@ bintree AlokasiTree(infotype E) {
 /* {I.S. P terdefinisi 
     F.S. P dikembalikan ke sistem  
 	Proses: Melakukan pengembalian bintree P} */
-void Dealokasi (bintree *P) {
+void DealokasiTree (bintree *P) {
   //kamus lokal
 
   //algoritma
@@ -42,8 +42,8 @@ bintree Tree (infotype akar, bintree left, bintree right) {
   bintree P;
 
   //algoritma
-  P = Alokasi(akar);
-  if (P != NIL) { //alokasi berhasil
+  P = AlokasiTree(akar);
+  if (P != NIL) {
     left(P) = left;
     right(P) = right;
   }
@@ -67,6 +67,11 @@ bintree GetRight(bintree P) {
   //algoritma
   return right(P);
 }
+/*function GetAkar (P : BinTree) -> infotype
+{ Mengirimkan Akar pohon biner P }*/
+infotype GetAkar(bintree P) {
+    return P->info;
+}
 /****************** PREDIKAT ******************/
 /* function IsEmptyTree(P:bintree) --> boolean 
    {mengembalikan true bila bintree L kosong} */
@@ -83,9 +88,9 @@ boolean IsDaun(bintree P) {
   //kamus lokal
 
   //algoritma
-  if (IsEmptyTree(P)) { //kasus pohon kosong
+  if (IsEmptyTree(P)) {
     return false;
-  } else { //kasus pohon tidak kosong
+  } else {
     return IsEmptyTree(GetLeft(P)) && IsEmptyTree(GetRight(P));
   }
 }
@@ -96,9 +101,9 @@ boolean IsBiner(bintree P) {
   //kamus lokal
 
   //algoritma
-  if (IsEmptyTree(P)) { //kasus pohon kosong
+  if (IsEmptyTree(P)) {
     return false;
-  } else { //kasus pohon tidak kosong
+  } else {
     return !IsEmptyTree(GetLeft(P)) && !IsEmptyTree(GetRight(P));
   }
 }
@@ -109,9 +114,9 @@ boolean IsUnerLeft(bintree P) {
   //kamus lokal
 
   //algoritma
-  if (IsEmptyTree(P)) { //kasus pohon kosong
+  if (IsEmptyTree(P)) {
     return false;
-  } else { //kasus pohon tidak kosong
+  } else {
     return !IsEmptyTree(GetLeft(P)) && IsEmptyTree(GetRight(P));
   }
 }
@@ -122,9 +127,9 @@ boolean IsUnerRight(bintree P) {
   //kamus lokal
 
   //algoritma
-  if (IsEmptyTree(P)) { //kasus pohon kosong
+  if (IsEmptyTree(P)) {
     return false;
-  } else { //kasus pohon tidak kosong
+  } else {
     return IsEmptyTree(GetLeft(P)) && !IsEmptyTree(GetRight(P));
   }
 }
@@ -139,10 +144,10 @@ void PrintPrefix(bintree P) {
   //kamus lokal
 
   //algoritma
-  if (IsEmptyTree(P)) { //kasus pohon kosong
+  if (IsEmptyTree(P)) {
     printf("( )");
-  } else { //kasus pohon tidak kosongs
-    printf("%c(", GetAkar(P));
+  } else {
+    printf("%c", GetAkar(P));
     PrintPrefix(GetLeft(P)); //rekursif anak pohon P sebelah kiri
     printf(",");
     PrintPrefix(GetRight(P)); //rekursif anak pohon P sebelah kanan
@@ -156,11 +161,10 @@ int NbElm(bintree P) {
   //kamus lokal
 
   //algoritma
-  if (IsEmptyTree(P)) { //kasus pohon kosong
+  if (IsEmptyTree(P)) {
     return 0;
-  } else { //kasus pohon tidak kosong
+  } else {
     return 1 + NbElm(GetLeft(P)) + NbElm(GetRight(P));
-    // 1 untuk akar, rekursif untuk anak kiri dan kanan
   }
 }
 
@@ -170,14 +174,13 @@ int NbDaun(bintree P) {
   //kamus lokal
 
   //algoritma
-  if (IsEmptyTree(P)) { //kasus pohon kosong
+  if (IsEmptyTree(P)) {
     return 0;
-  } else { //kasus pohon tidak kosong
-    if (IsDaun(P)) { //kasus pohon daun
+  } else { 
+    if (IsDaun(P)) { 
       return 1;
-    } else { //kasus pohon tidak kosong dan bukan daun
+    } else {
       return NbDaun(GetLeft(P)) + NbDaun(GetRight(P));
-      // rekursif untuk anak kiri dan kanan
     }
   }
 }
@@ -188,9 +191,9 @@ int max2(int a, int b) {
   //kamus lokal
 
   //algoritma
-  if (a > b) { //a lebih besar dari b
+  if (a > b) {
     return a;
-  } else { //b lebih besar dari a atau sama dengan a
+  } else {
     return b;
   }
 }
@@ -201,13 +204,12 @@ int Tinggi(bintree P) {
   /*kamus lokal*/
 
   /*algoritma*/
-  if (IsEmptyTree(P)) { /*kasus kosong*/
-    return 0;
-  } else if (NbElm(P) == 1) { /*kasus pohon 1 elemen*/
-    return 0;
-  } else { /*kasus lebih dari 1 elemen dan tidak kosong*/
-    return 1 + max2(Tinggi(GetLeft(P)), Tinggi(GetRight(P)));
-    // 1 untuk akar, max dari tinggi anak kiri dan kanan
+  if (IsEmptyTree(P)) {
+      return 0;
+  } else if (NbElm(P) == 1) {
+      return 0;
+  } else { 
+      return 1 + max2(Tinggi(GetLeft(P)), Tinggi(GetRight(P)));
   }
 }
 
@@ -219,11 +221,11 @@ boolean SearchX(bintree P, infotype X) {
   //kamus lokal
 
   //algoritma
-  if (IsEmptyTree(P)) { //kasus pohon kosong
+  if (IsEmptyTree(P)) { 
     return false;
-  } else if (GetAkar(P) == X) { //kasus pohon tidak kosong dan akar sama dengan X
+  } else if (GetAkar(P) == X) { 
     return true;
-  } else { //kasus pohon tidak kosong dan akar tidak sama dengan X
+  } else { 
     return SearchX(GetLeft(P), X) || SearchX(GetRight(P), X);
   }
 }
@@ -238,13 +240,13 @@ void UpdateX(bintree *P, infotype X, infotype Y) {
   //kamus lokal
 
   //algoritma
-  if (!IsEmptyTree(*P)) { //kasus pohon tidak kosong
-    if (GetAkar(*P) == X) { //kasus akar sama dengan X
+  if (!IsEmptyTree(*P)) { 
+    if (GetAkar(*P) == X) {
       akar(*P) = Y;
-    } else { //kasus akar tidak sama dengan X
-      if (SearchX(GetLeft(*P), X)){ //jika X ada di anak pohon P sebelah kiri
+    } else {
+      if (SearchX(GetLeft(*P), X)){
         UpdateX(&left(*P), X, Y);
-      } else { //jika X ada di anak pohon P sebelah kanan
+      } else {
         UpdateX(&right(*P), X, Y);
       }
     }
@@ -259,14 +261,12 @@ int CountX(bintree P, infotype X) {
   //kamus lokal
 
   //algoritma
-  if (IsEmptyTree(P)) { //kasus pohon kosong
+  if (IsEmptyTree(P)) { 
     return 0;
-  } else if (GetAkar(P) == X) { //kasus pohon tidak kosong dan akar sama dengan X
+  } else if (GetAkar(P) == X) { 
     return 1 + CountX(GetLeft(P), X) + CountX(GetRight(P), X);
-    // 1 untuk akar, rekursif untuk anak kiri dan kanan
-  } else { //kasus pohon tidak kosong dan akar tidak sama dengan X
+  } else { 
     return CountX(GetLeft(P), X) + CountX(GetRight(P), X);
-    // rekursif untuk anak kiri dan kanan
   }
 }
 
@@ -276,26 +276,24 @@ boolean IsSkewLeft (bintree P) {
   //kamus lokal
 
   //algoritma
-  if (IsEmptyTree(P)) { //kasus pohon kosong
+  if (IsEmptyTree(P)) {
     return true;
-  } else if (IsUnerLeft(P)) { //kasus pohon unerleft
+  } else if (IsUnerLeft(P)) { 
     return true;
-  } else { //kasus pohon bukan unerleft
+  } else {
     return IsEmptyTree(GetRight(P)) && IsSkewLeft(GetLeft(P));
-    // anak kanan kosong dan rekursif untuk anak kiri
   }
 }
 
 /*function IsSkewRight (P : BinTree) -> boolean
 { Mengirim true jika P adalah pohon condong kanan }*/
 boolean IsSkewRight (bintree P) {
-  if (IsEmptyTree(P)) { //kasus pohon kosong
+  if (IsEmptyTree(P)) { 
     return true;
-  } else if (IsUnerRight(P)) { //kasus pohon unerright
+  } else if (IsUnerRight(P)) { 
     return true;
-  } else { //kasus pohon bukan unerright
+  } else { 
     return IsEmptyTree(GetLeft(P)) && IsSkewRight(GetRight(P));
-    // anak kiri kosong dan rekursif untuk anak kanan
   }
 }
 
@@ -307,14 +305,14 @@ void PrintPrefixRingkas(bintree P) {
   //kamus lokal
 
   //algoritma
-  if (IsEmptyTree(P)) { //kasus pohon kosong
+  if (IsEmptyTree(P)) { 
     printf("( )");
-  } else { //kasus pohon tidak kosongs
+  } else {
     printf("%c", GetAkar(P));
-    if (!IsEmptyTree(GetLeft(P)) || !IsEmptyTree(GetRight(P))) { // cek jika ada anak
+    if (!IsEmptyTree(GetLeft(P)) || !IsEmptyTree(GetRight(P))) { 
       printf("(");
       PrintPrefixRingkas(GetLeft(P));
-      if (!IsEmptyTree(GetRight(P))) { // cek jika anak kanan tidak kosong
+      if (!IsEmptyTree(GetRight(P))) { 
         printf(",");
         PrintPrefixRingkas(GetRight(P));
       }
@@ -329,17 +327,17 @@ int LevelX(bintree P, infotype X) {
   //kamus lokal
 
   //algoritma
-  if (IsEmptyTree(P)) { //kasus pohon kosong
+  if (IsEmptyTree(P)) { 
     return 0;
   } else {
-    if (GetAkar(P) == X) { //kasus akar sama dengan X
+    if (GetAkar(P) == X) { 
       return 1;
     } else {
-      if (LevelX(GetLeft(P), X) != 0) { //kasus X ditemukan di anak kiri
+      if (LevelX(GetLeft(P), X) != 0) { 
         return 1 + LevelX(GetLeft(P), X);
-      } else if (LevelX(GetRight(P), X) != 0) { //kasus X ditemukan di anak kanan
+      } else if (LevelX(GetRight(P), X) != 0) { 
         return 1 + LevelX(GetRight(P), X);
-      } else { //kasus X tidak ditemukan
+      } else { 
         return 0;
       }
     }
@@ -355,12 +353,10 @@ int CountLevel(bintree P, int T) {
   if (IsEmptyTree(P)) { //kasus pohon kosong
     return 0;
   } else {
-    if (T == 1) { //kasus tingkat 1
-      return 1; //hanya akar
+    if (T == 1) { 
+      return 1; 
     } else {
       return CountLevel(GetLeft(P), T - 1) + CountLevel(GetRight(P), T - 1);
-      // rekursif untuk anak kiri dan kanan
-      // T - 1 karena level akar sudah dihitung
     }
   }
 }
@@ -372,14 +368,14 @@ void PrintLevel(bintree P, int N){
     //kamus lokal
     
     //algoritma
-    if (IsEmptyTree(P)) { //kasus pohon kosong
+    if (IsEmptyTree(P)) { 
         return;
     } else {
-        if (N == 1) { //kasus tingkat 1
-        printf("%c ", GetAkar(P)); //menampilkan akar
+        if (N == 1) { 
+        printf("%c ", GetAkar(P)); 
         } else {
-        PrintLevel(GetLeft(P), N - 1); //rekursif untuk anak kiri
-        PrintLevel(GetRight(P), N - 1); //rekursif untuk anak kanan
+        PrintLevel(GetLeft(P), N - 1); 
+        PrintLevel(GetRight(P), N - 1); 
         }
     }
 }
@@ -390,15 +386,15 @@ infotype GetDaunTerkiri(bintree P) {
   //kamus lokal
 
   //algoritma
-  if (IsEmptyTree(P)) { //kasus pohon kosong
+  if (IsEmptyTree(P)) { 
     return '#';
   } else {
-    if (IsDaun(P)) { //kasus pohon daun
+    if (IsDaun(P)) { 
       return GetAkar(P);
     } else {
-      if (!IsEmptyTree(GetLeft(P))) { //kasus anak kiri tidak kosong
+      if (!IsEmptyTree(GetLeft(P))) { 
         return GetDaunTerkiri(GetLeft(P));
-      } else { //kasus anak kiri kosong
+      } else { 
         return GetDaunTerkiri(GetRight(P));
       }
     }
@@ -411,12 +407,11 @@ float FrekuensiX(bintree P, infotype X) {
   //kamus lokal
 
   //algoritma
-  if (IsEmptyTree(P)) { //kasus pohon kosong
+  if (IsEmptyTree(P)) {
     return 0;
-    // menangani kasus error divide by zero
-  } else {  //kasus pohon tidak kosong
+  }
+  else {
     return (float) CountX(P, X) / NbElm(P);
-    // menghitung rasio kemunculan X dibandingkan ukuran pohon
   }
 }
 
@@ -428,13 +423,11 @@ int CountVocal(bintree L) {
   //algoritma
   if (IsEmptyTree(L)) { //kasus pohon kosong
     return 0;
-  } else { //kasus pohon tidak kosong
+  } else {
     if (GetAkar(L) == 'A' || GetAkar(L) == 'a' || GetAkar(L) == 'I' || GetAkar(L) == 'i' || GetAkar(L) == 'U' || GetAkar(L) == 'u' || GetAkar(L) == 'E' || GetAkar(L) == 'e' || GetAkar(L) == 'O' || GetAkar(L) == 'o') { //kasus akar huruf vokal
       return 1 + CountVocal(GetLeft(L)) + CountVocal(GetRight(L));
-      // 1 untuk akar, rekursif untuk anak kiri dan kanan
-    } else { //kasus akar bukan huruf vokal
+    } else {
       return CountVocal(GetLeft(L)) + CountVocal(GetRight(L));
-      // rekursif untuk anak kiri dan kanan
     }
   }
 }
@@ -448,12 +441,12 @@ void PrintVocal(bintree P){
     //algoritma
     if (IsEmptyTree(P)) { //kasus pohon kosong
         return;
-    } else { //kasus pohon tidak kosong
+    } else { 
         if (GetAkar(P) == 'A' || GetAkar(P) == 'a' || GetAkar(P) == 'I' || GetAkar(P) == 'i' || GetAkar(P) == 'U' || GetAkar(P) == 'u' || GetAkar(P) == 'E' || GetAkar(P) == 'e' || GetAkar(P) == 'O' || GetAkar(P) == 'o') { //kasus akar huruf vokal
             printf("%c ", GetAkar(P));
         }
-        PrintVocal(GetLeft(P)); //rekursif untuk anak kiri
-        PrintVocal(GetRight(P)); //rekursif untuk anak kanan
+        PrintVocal(GetLeft(P));
+        PrintVocal(GetRight(P));
     }
 }
 
@@ -465,13 +458,11 @@ int CountConsonant(bintree P){
     //algoritma
     if (IsEmptyTree(P)) { //kasus pohon kosong
         return 0;
-    } else { //kasus pohon tidak kosong
+    } else { 
         if (! (GetAkar(P) == 'A' || GetAkar(P) == 'a' || GetAkar(P) == 'I' || GetAkar(P) == 'i' || GetAkar(P) == 'U' || GetAkar(P) == 'u' || GetAkar(P) == 'E' || GetAkar(P) == 'e' || GetAkar(P) == 'O' || GetAkar(P) == 'o')) { //kasus akar huruf konsonan
             return 1 + CountConsonant(GetLeft(P)) + CountConsonant(GetRight(P));
-            // 1 untuk akar, rekursif untuk anak kiri dan kanan
-        } else { //kasus akar bukan huruf konsonan
+        } else { 
             return CountConsonant(GetLeft(P)) + CountConsonant(GetRight(P));
-            // rekursif untuk anak kiri dan kanan
         }
     }
 }
@@ -483,14 +474,14 @@ void PrintConsonant(bintree P){
     //kamus lokal
 
     //algoritma
-    if (IsEmptyTree(P)) { //kasus pohon kosong
+    if (IsEmptyTree(P)) { 
         return;
-    } else { //kasus pohon tidak kosong
+    } else { 
         if (! (GetAkar(P) == 'A' || GetAkar(P) == 'a' || GetAkar(P) == 'I' || GetAkar(P) == 'i' || GetAkar(P) == 'U' || GetAkar(P) == 'u' || GetAkar(P) == 'E' || GetAkar(P) == 'e' || GetAkar(P) == 'O' || GetAkar(P) == 'o')) { //kasus akar huruf konsonan
             printf("%c ", GetAkar(P));
         }
-        PrintConsonant(GetLeft(P)); //rekursif untuk anak kiri
-        PrintConsonant(GetRight(P)); //rekursif untuk anak kanan
+        PrintConsonant(GetLeft(P)); 
+        PrintConsonant(GetRight(P));
     }
 }
 
@@ -504,19 +495,19 @@ char Modus(bintree P) {
   char modus;
 
   // algoritma
-  if (!IsEmptyTree(P)) { //kasus pohon tidak kosong
+  if (!IsEmptyTree(P)) { 
     temp = GetAkar(P);
     count = CountX(P, temp);
     modus = temp;
-    if (CountX(P, Modus(GetLeft(P))) > count) { //jika modus di sebelah kiri lebih besar
+    if (CountX(P, Modus(GetLeft(P))) > count) {
       modus = Modus(GetLeft(P));
       count = CountX(P, modus);
-    } else if (CountX(P, Modus(GetRight(P))) > count) { //jika modus di sebelah kanan lebih besar
+    } else if (CountX(P, Modus(GetRight(P))) > count) { 
       modus = Modus(GetRight(P));
       count = CountX(P, modus);
     }
-  } else { //kasus pohon kosong
-    modus = '#'; // Return a default value if the tree is empty
+  } else { 
+    modus = '#'; 
   }
   return modus;
 }
