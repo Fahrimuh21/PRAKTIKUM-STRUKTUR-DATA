@@ -1,6 +1,6 @@
 /* File : pohon1.c */
 /* Deskripsi : ADT bintree berkait dengan representasi fisik pointer */
-/* NIM & Nama : Muhammad Fahri */
+/* NIM & Nama : 24060124120037/Muhammad Fahri */
 /* Tanggal : 27 November 2025*/
 
 #include "pohon1.h"

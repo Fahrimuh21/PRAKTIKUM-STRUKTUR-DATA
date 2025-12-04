@@ -4,7 +4,7 @@
 /* Program   : boolean.h */
 /* Deskripsi : header file modul boolean */
 /* NIM/Nama  : 24060124120037/Muhammad Fahri*/
-/* Tanggal   : 20 November 2025*/
+/* Tanggal   : 27 November 2025*/
 
 //type boolean macro bahasa C, false=0, true=1
 #define false 0
