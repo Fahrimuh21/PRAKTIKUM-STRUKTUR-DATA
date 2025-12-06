@@ -18,7 +18,7 @@ void PrintTreeInden(bintree P, int H );
 /* procedure PrintLevel(input P:bintree, input N:integer)
 {I.S. L terdefinisi; F.S. :-}
 { menampilkan info semua elemen bintree P pada generasi/level N} */
-void PrintLevel(bintree P, int N);
+void PrintLevel2(bintree P, int N);
 
 /*** MANIPULASI ELEMEN bintree ***/
 /*Procedure UpdateAllX(input/output P:bintree, input X:infotype, input Y:infotype)

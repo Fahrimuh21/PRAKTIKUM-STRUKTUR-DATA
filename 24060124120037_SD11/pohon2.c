@@ -18,11 +18,11 @@ void PrintTreeInden(bintree P, int H ){
         for (i = 0; i < H; i++) {
         printf(" ");
         }
-        printf("(\n");
+        printf("()\n");
         for (i = 0; i < H; i++) {
         printf(" ");
         }
-        printf(")\n");
+        printf("\n");
     } else {
         PrintTreeInden(GetRight(P), H + 4);
         for (i = 0; i < H; i++) {
@@ -36,7 +36,7 @@ void PrintTreeInden(bintree P, int H ){
 /* procedure PrintLevel(input P:bintree, input N:integer)
 {I.S. L terdefinisi; F.S. :-}
 { menampilkan info semua elemen bintree P pada generasi/level N} */
-void PrintLevel(bintree P, int N){
+void PrintLevel2(bintree P, int N){
     //kamus lokal
     
     //algoritma
@@ -46,8 +46,8 @@ void PrintLevel(bintree P, int N){
         if (N == 1) { 
         printf("%c ", GetAkar(P)); 
         } else {
-        PrintLevel(GetLeft(P), N - 1);
-        PrintLevel(GetRight(P), N - 1);
+        PrintLevel2(GetLeft(P), N - 1);
+        PrintLevel2(GetRight(P), N - 1);
         }
     }
 }
@@ -83,7 +83,7 @@ void AddDaunTerkiri(bintree *P, infotype X){
             *P = NewNode;
         }
     } else {
-        AddDaunTerkiri(GetLeft(P), X);
+        AddDaunTerkiri(&left(*P), X);
     }
 }
 
@@ -94,7 +94,7 @@ void AddDaun(bintree *P, infotype X, infotype Y, boolean Kiri){
     //kamus lokal
     bintree NewNode;
     //algoritma
-    if (!IsEmptyTree(P)) {
+    if (!IsEmptyTree(*P)) {
         if (IsDaun(*P) && GetAkar(*P) == X) {
         NewNode = AlokasiTree(Y);
         if (NewNode != NIL) {
@@ -143,7 +143,7 @@ void DelDaunTerkiri(bintree *P, infotype X){
     if (!IsEmptyTree(*P)) {
         if (IsDaun(*P)) {
         X = GetAkar(*P);
-        DealokasiTree(*P);
+        DealokasiTree(P);
         } else {
         DelDaunTerkiri(&left(*P), X);
         }
@@ -169,16 +169,37 @@ void DelDaun(bintree *P, infotype X){
 
 /*procedure DeleteX (input/output P : BinTree, input X : infotype)
 { Menghapus simpul bernilai X bila ada dari P, HATI-HATI! }*/
-void DeleteX(bintree *P, infotype X){
-    //kamus lokal
+void DeleteX(bintree *P, infotype X)
+{
+    // kamus lokal
+    bintree Temp;
 
-    //algoritma
+    // algoritma
     if (!IsEmptyTree(*P)) {
-        if (GetAkar(*P) == X) {
-        DelDaunTerkiri(P, X); //menghapus daun terkiri sebagai pengganti
+        if (akar(*P) == X) {
+            if (IsDaun(*P)) {
+                // Jika node adalah daun, hapus langsung
+                DealokasiTree(P);
+            } else if (!IsEmptyTree(left(*P)) && IsDaun(left(*P))) {
+                // Jika anak kiri adalah daun, ambil nilai anak kiri
+                akar(*P) = akar(left(*P));
+                DealokasiTree(&left(*P));
+            } else if (!IsEmptyTree(right(*P)) && IsDaun(right(*P))) {
+                // Jika anak kanan adalah daun, ambil nilai anak kanan
+                akar(*P) = akar(right(*P));
+                DealokasiTree(&right(*P));
+            } else if (!IsEmptyTree(left(*P))) {
+                // Ambil daun terkiri dari subtree kiri
+                akar(*P) = GetDaunTerkiri(left(*P));
+                DeleteX(&left(*P), akar(*P));
+            } else if (!IsEmptyTree(right(*P))) {
+                // Ambil daun terkiri dari subtree kanan
+                akar(*P) = GetDaunTerkiri(right(*P));
+                DeleteX(&right(*P), akar(*P));
+            }
         } else {
-        DeleteX(&left(*P), X);
-        DeleteX(&right(*P), X);
+            DeleteX(&left(*P), X);
+            DeleteX(&right(*P), X);
         }
     }
 }
